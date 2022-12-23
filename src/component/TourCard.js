@@ -5,11 +5,40 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { AccessTime } from "@mui/icons-material";
 import { Rating } from "@mui/material";
+import { createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+
+const theme= createTheme({
+    components:{
+        MuiTypography:{
+            variants:[
+                {
+                    props:{
+                        variant:'body2',
+                    },
+                    style:{
+                        fontSize:11,
+                    },
+                },
+                {
+                    props:{
+                        variant:'body3',
+                    },
+                    style:{
+                        fontSize:9,
+                    },
+                },
+            ],
+        },
+    },
+});
 
 const TourCard = () => {
   return (
-    <Grid item xs={3}>
-      <Paper elevation={3}>
+    <Grid item lg={3} md={3} sm={6} xs={6}>
+        <ThemeProvider theme={theme}>
+
+        <Paper elevation={3}>
         <img
           className="img"
           src="https://media.timeout.com/images/105124791/750/422/image.jpg"
@@ -35,11 +64,22 @@ const TourCard = () => {
               display: "flex",
               alignItems: "center",
             }}
+            marginTop='1.5rem'
           >
-            <Rating name="read-only" value={4.5} readOnly precision={0.5} />
+            <Rating name="read-only" value={4.5} readOnly precision={0.5} size="small" />
+            <Typography variant="body2" component="p" marginLeft={0.5}>
+              4.5
+            </Typography>
+            <Typography variant="body3" component="p" marginLeft={1}>
+            (655 reviews)
+            </Typography>
           </Box>
+          <Typography variant="h6" component="h3" marginTop={0}>
+              From C $147
+            </Typography>
         </Box>
       </Paper>
+        </ThemeProvider>
     </Grid>
   );
 };
